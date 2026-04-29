@@ -1,0 +1,12 @@
+sudakov.site {
+	root * /srv/sudakov-site
+	file_server
+}
+
+jellyfin.sudakov.site {
+	reverse_proxy 127.0.0.1:8096
+}
+
+agent.sudakov.site {
+	reverse_proxy 127.0.0.1:3099
+}
