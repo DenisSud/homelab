@@ -8,5 +8,10 @@ jellyfin.sudakov.site {
 }
 
 agent.sudakov.site {
-	reverse_proxy 127.0.0.1:3099
+	handle /ws* {
+		reverse_proxy 127.0.0.1:3099
+	}
+	handle {
+		reverse_proxy 127.0.0.1:3000
+	}
 }
