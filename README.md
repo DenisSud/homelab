@@ -1,15 +1,16 @@
 # homelab
 
-Infrastructure monorepo for the `sudakov.site` homelab. Runs on a Debian-based Raspberry Pi.
+Infrastructure monorepo for `sudakov.site`. Manages both the Raspberry Pi (reverse proxy, deploy) and the PC (NVIDIA GPU services, machine bootstrap).
 
 ## What's here
 
 | Directory | What |
 |---|---|
-| `caddy/Caddyfile` | Reverse proxy config (`sudakov.site`, `*.sudakov.site`) |
-| `jellyfin/compose.yml` | Jellyfin media server (Docker Compose) |
-| `scripts/deploy.sh` | One-command deploy: Caddy, site, agent, all compose services |
-| `scripts/check_health.sh` | Status snapshot: systemd, docker, HTTP endpoints, disk |
+| `caddy/Caddyfile` | Reverse proxy config — Pi (`sudakov.site`, `*.sudakov.site`) |
+| `jellyfin/compose.yml` | Jellyfin media server — PC (NVIDIA GPU, Movies + TV) |
+| `pc/setup-pc.sh` | Bootstrap a fresh Debian PC (NVIDIA drivers, Docker, dotfiles) |
+| `scripts/deploy.sh` | One-command deploy — Pi: Caddy, site, agent, all compose services |
+| `scripts/check_health.sh` | Status snapshot — Pi: systemd, docker, HTTP endpoints, disk |
 
 ## Adding a service
 
@@ -32,9 +33,9 @@ All source repos live as siblings under `~/su-underscore/`:
 
 ```
 ~/su-underscore/
-├── sudakov-site/     # github.com/su-underscore/sudakov-site
-├── pi-agent-web/     # github.com/su-underscore/pi-agent-web
-└── homelab/          # github.com/su-underscore/homelab (this repo)
+├── sudakov-site/     # github.com/DenisSud/site
+├── pi-agent-web/     # github.com/su-computer-company/pi-agent-web
+└── homelab/          # github.com/DenisSud/homelab (this repo)
 ```
 
 From your dev machine:
@@ -44,6 +45,16 @@ git add -A && git commit -m "..." && git push
 ssh denis@192.168.1.6
 cd ~/su-underscore/homelab && git pull
 ./scripts/deploy.sh
+```
+
+## PC setup
+
+On a fresh Debian PC:
+
+```bash
+git clone git@github.com:DenisSud/homelab.git
+cd homelab
+bash pc/setup-pc.sh
 ```
 
 ## Health check

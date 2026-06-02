@@ -37,6 +37,7 @@ for svc_dir in "$REPO_DIR"/../*/; do
 	name=$(basename "$svc_dir")
 	[ "$name" = "caddy" ] && continue
 	[ "$name" = "scripts" ] && continue
+	[ "$name" = "pc" ] && continue
 	if [ -f "$svc_dir/compose.yml" ] || [ -f "$svc_dir/docker-compose.yml" ]; then
 		echo "==> $name: docker compose pull && up -d"
 		(cd "$svc_dir" && docker compose pull && docker compose up -d)

@@ -8,8 +8,18 @@ services:
     volumes:
       - jellyfin_config:/config
       - jellyfin_cache:/cache
-      - /mnt/denis/Movies:/media/movies:ro
+      - /mnt/media/Movies:/media/movies:ro
+      - /mnt/media/TV:/media/tv:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
 volumes:
   jellyfin_config:
+    name: jellyfin_config
   jellyfin_cache:
+    name: jellyfin_cache
